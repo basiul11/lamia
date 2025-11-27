@@ -14,8 +14,8 @@ app.use(express.json()); // لتحليل الطلبات القادمة كـ JSON
 // --- إعدادات CORS ---
 // في بيئة التطوير، نسمح للجميع بالوصول
 // في بيئة الإنتاج (على Railway)، سنحدد رابط Netlify فقط
-// **ملاحظة:** استبدل الرابط أدناه برابط موقعك الفعلي على Netlify بعد نشره
-const whitelist = ['http://localhost:5500', 'http://127.0.0.1:5500', 'https://your-app-name.netlify.app']; 
+// **ملاحظة هامة:** استبدل الرابط أدناه برابط موقعك الفعلي على Netlify
+const whitelist = ['http://localhost:5500', 'http://127.0.0.1:5500', 'https://your-netlify-app-name.netlify.app']; 
 const corsOptions = {
   origin: function (origin, callback) {
     // نسمح بالطلبات التي ليس لها origin (مثل Postman أو تطبيقات الموبايل) في بيئة التطوير
