@@ -57,5 +57,5 @@ app.listen(PORT, () => {
 
 // توجيه أي طلب غير معروف إلى صفحة تسجيل الدخول
 app.get('*', (req, res) => {
-  res.sendFile(path.resolve(publicPath, 'login.html'));
+  res.sendFile(path.resolve(publicPath, 'index.html'));
 });
