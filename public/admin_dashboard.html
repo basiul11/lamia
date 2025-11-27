@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة تحكم المدير | لاميا أكاديمي</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style> body { font-family: 'Cairo', sans-serif; } </style>
+</head>
+<body class="bg-gray-100">
+    <div class="flex min-h-screen">
+        <!-- Sidebar -->
+        <aside class="w-64 bg-slate-800 text-white flex-shrink-0 hidden lg:flex flex-col">
+            <div class="p-6 text-center border-b border-slate-700">
+                <h2 class="text-2xl font-bold">لاميا أكاديمي</h2>
+                <p class="text-sm text-slate-400 mt-1">لوحة تحكم المدير</p>
+            </div>
+            <nav class="p-4 flex-1">
+                <a href="admin_dashboard.html" class="flex items-center text-white p-3 rounded-lg bg-slate-700 font-bold transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-3" viewBox="0 0 20 20" fill="currentColor"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" /></svg>
+                    <span>لوحة التحكم</span>
+                </a>
+                <a href="user_management.html" class="flex items-center text-slate-300 p-3 rounded-lg hover:bg-slate-700 transition-colors mt-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-3" viewBox="0 0 20 20" fill="currentColor"><path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zm-2 5a5 5 0 00-5 5v1h12v-1a5 5 0 00-5-5H7zm6-6a1 1 0 100-2 1 1 0 000 2zm3 5a5 5 0 015 5v1h-4v-1a1 1 0 00-1-1h-2a1 1 0 00-1 1v1h-2v-1a5 5 0 015-5zm-6-4a1 1 0 100-2 1 1 0 000 2z" /></svg>
+                    <span>إدارة المستخدمين</span>
+                </a>
+                <a href="settings.html" class="flex items-center text-slate-300 p-3 rounded-lg hover:bg-slate-700 transition-colors mt-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-3" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01-.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd" /></svg>
+                    <span>الإعدادات</span>
+                </a>
+            </nav>
+            <div class="p-4 mt-auto border-t border-slate-700">
+                <a href="login.html" class="flex items-center justify-center w-full bg-red-500 text-white py-2 rounded-lg hover:bg-red-600 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3 3a1 1 0 00-1 1v12a1 1 0 102 0V4a1 1 0 00-1-1zm10.293 9.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L14.586 9H7a1 1 0 100 2h7.586l-1.293 1.293z" clip-rule="evenodd" /></svg>
+                    <span>تسجيل الخروج</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 p-6 lg:p-10">
+            <header class="flex justify-between items-center mb-8">
+                <div>
+                    <h1 class="text-3xl font-bold text-gray-800">لوحة التحكم الرئيسية</h1>
+                    <p class="text-gray-500">نظرة عامة على النظام.</p>
+                </div>
+                <div class="flex items-center">
+                    <span class="text-gray-600">أهلاً، <strong>أحمد (مدير)</strong></span>
+                    <div class="w-10 h-10 rounded-full bg-gray-200 mr-4 flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-400" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" /></svg>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Stat Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <!-- Card -->
+                <div class="bg-white p-6 rounded-lg shadow-md flex items-center">
+                    <div class="bg-blue-100 text-blue-600 p-3 rounded-full mr-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
+                    </div>
+                    <div>
+                        <h4 class="text-gray-500 font-medium">إجمالي الطلاب</h4>
+                        <p class="text-3xl font-bold text-gray-800">0</p>
+                    </div>
+                </div>
+                <!-- Card -->
+                <div class="bg-white p-6 rounded-lg shadow-md flex items-center">
+                    <div class="bg-green-100 text-green-600 p-3 rounded-full mr-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+                    </div>
+                    <div>
+                        <h4 class="text-gray-500 font-medium">إجمالي المعلمين</h4>
+                        <p class="text-3xl font-bold text-gray-800">0</p>
+                    </div>
+                </div>
+                <!-- Card -->
+                <div class="bg-white p-6 rounded-lg shadow-md flex items-center">
+                    <div class="bg-yellow-100 text-yellow-600 p-3 rounded-full mr-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" /></svg>
+                    </div>
+                    <div>
+                        <h4 class="text-gray-500 font-medium">إجمالي المواد</h4>
+                        <p class="text-3xl font-bold text-gray-800">0</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Users Table -->
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-xl font-semibold text-gray-700">قائمة المستخدمين</h3>
+                    <a href="user_management.html" class="text-sm text-blue-600 hover:underline">عرض الكل</a>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-right">
+                        <thead>
+                            <tr class="border-b">
+                                <th class="py-3 px-4 font-semibold text-gray-600">رقم المستخدم</th>
+                                <th class="py-3 px-4 font-semibold text-gray-600">الاسم</th>
+                                <th class="py-3 px-4 font-semibold text-gray-600">الدور</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b hover:bg-gray-50">
+                                <td class="py-3 px-4">1001</td>
+                                <td class="py-3 px-4">محمد علي</td>
+                                <td class="py-3 px-4"><span class="bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full">طالب</span></td>
+                            </tr>
+                            <tr class="border-b hover:bg-gray-50">
+                                <td class="py-3 px-4">2001</td>
+                                <td class="py-3 px-4">فاطمة الزهراء</td>
+                                <td class="py-3 px-4"><span class="bg-yellow-100 text-yellow-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full">معلم</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

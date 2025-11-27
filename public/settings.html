@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الإعدادات | لاميا أكاديمي</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style> body { font-family: 'Cairo', sans-serif; } </style>
+</head>
+<body class="bg-gray-100">
+    <div class="flex min-h-screen">
+        <!-- Sidebar -->
+        <aside class="w-64 bg-slate-800 text-white flex-shrink-0 hidden lg:flex flex-col">
+            <div class="p-6 text-center border-b border-slate-700">
+                <h2 class="text-2xl font-bold">لاميا أكاديمي</h2>
+                <p class="text-sm text-slate-400 mt-1">لوحة تحكم المدير</p>
+            </div>
+            <nav class="p-4 flex-1">
+                <a href="admin_dashboard.html" class="flex items-center text-slate-300 p-3 rounded-lg hover:bg-slate-700 transition-colors mt-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-3" viewBox="0 0 20 20" fill="currentColor"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" /></svg>
+                    <span>لوحة التحكم</span>
+                </a>
+                <a href="user_management.html" class="flex items-center text-slate-300 p-3 rounded-lg hover:bg-slate-700 transition-colors mt-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-3" viewBox="0 0 20 20" fill="currentColor"><path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zm-2 5a5 5 0 00-5 5v1h12v-1a5 5 0 00-5-5H7zm6-6a1 1 0 100-2 1 1 0 000 2zm3 5a5 5 0 015 5v1h-4v-1a1 1 0 00-1-1h-2a1 1 0 00-1 1v1h-2v-1a5 5 0 015-5zm-6-4a1 1 0 100-2 1 1 0 000 2z" /></svg>
+                    <span>إدارة المستخدمين</span>
+                </a>
+                <a href="settings.html" class="flex items-center text-white p-3 rounded-lg bg-slate-700 font-bold transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-3" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01-.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd" /></svg>
+                    <span>الإعدادات</span>
+                </a>
+            </nav>
+            <div class="p-4 mt-auto border-t border-slate-700">
+                <a href="login.html" class="flex items-center justify-center w-full bg-red-500 text-white py-2 rounded-lg hover:bg-red-600 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3 3a1 1 0 00-1 1v12a1 1 0 102 0V4a1 1 0 00-1-1zm10.293 9.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L14.586 9H7a1 1 0 100 2h7.586l-1.293 1.293z" clip-rule="evenodd" /></svg>
+                    <span>تسجيل الخروج</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 p-6 lg:p-10">
+            <header class="flex justify-between items-center mb-8">
+                <div>
+                    <h1 class="text-3xl font-bold text-gray-800">الإعدادات</h1>
+                    <p class="text-gray-500">إدارة إعدادات حسابك.</p>
+                </div>
+                <div class="flex items-center">
+                    <span class="text-gray-600">أهلاً، <strong>أحمد (مدير)</strong></span>
+                    <div class="w-10 h-10 rounded-full bg-gray-200 mr-4 flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-400" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" /></svg>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Profile Settings Section -->
+            <div class="bg-white p-8 rounded-lg shadow-md max-w-2xl">
+                <h3 class="text-xl font-semibold text-gray-700 mb-6">إعدادات الملف الشخصي</h3>
+                <form>
+                    <div class="mb-4">
+                        <label for="adminName" class="block text-gray-700 text-sm font-bold mb-2">الاسم الكامل</label>
+                        <input type="text" id="adminName" value="أحمد (مدير)" class="shadow-sm appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                    <div class="mb-6">
+                        <label for="adminUserId" class="block text-gray-700 text-sm font-bold mb-2">رقم المستخدم (لا يمكن تغييره)</label>
+                        <input type="text" id="adminUserId" value="999" disabled class="shadow-sm appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight bg-gray-200 cursor-not-allowed">
+                    </div>
+                    <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline transition-colors">حفظ التغييرات</button>
+                </form>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

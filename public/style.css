@@ -1,0 +1,283 @@
+/* General Styling */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    /* Main colors for Lamia Academy */
+    --primary-color: #4364F7; /* Main Blue */
+    --primary-dark: #0052D4; /* Darker Blue */
+    --secondary-color: #6FB1FC; /* Light Blue */
+    --accent-color: #f7a943; /* Orange/Gold for highlight */
+    --text-dark: #333333;
+    --text-medium: #555555;
+    --text-light: #777777;
+    --bg-light: #f4f7f6;
+    --bg-white: #ffffff;
+}
+
+body {
+    font-family: 'Cairo', sans-serif;
+    background-color: var(--bg-light);
+    color: var(--text-dark);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    direction: rtl; /* Ensure RTL from CSS side for consistency */
+}
+
+/* --- Main Container --- */
+.login-container {
+    display: flex;
+    width: 950px; /* Slightly wider */
+    max-width: 95%;
+    height: 650px; /* Slightly taller */
+    max-height: 95%;
+    background-color: var(--bg-white);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15); /* Stronger shadow */
+    border-radius: 25px; /* Softer border */
+    overflow: hidden;
+    /* Reverse the order for RTL layout (branding on the right, form on the left) */
+    flex-direction: row-reverse; 
+}
+
+/* --- Branding Section (Right Side in RTL) --- */
+.branding-wrapper {
+    background-image: linear-gradient(to top left, var(--primary-dark), var(--primary-color), var(--secondary-color));
+    color: white;
+    flex: 1.2; /* Give branding a bit more space */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 40px;
+    position: relative;
+    /* Adding a subtle overlay effect for depth */
+    box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.1); 
+}
+
+.branding-wrapper h1 {
+    font-size: 3.5rem;
+    margin-bottom: 15px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.branding-wrapper p {
+    font-size: 1.3rem;
+    font-weight: 400;
+    max-width: 80%;
+    opacity: 0.9;
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    padding-top: 15px;
+}
+
+/* --- Form Section (Left Side in RTL) --- */
+.login-form-wrapper {
+    flex: 1; 
+    padding: 50px 60px; /* More padding */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.form-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.form-header h2 {
+    font-size: 2.2rem;
+    color: var(--primary-dark);
+    margin-bottom: 8px;
+    position: relative;
+}
+/* Underline effect for header */
+.form-header h2::after {
+    content: '';
+    display: block;
+    width: 50px;
+    height: 3px;
+    background-color: var(--accent-color);
+    margin: 8px auto 0;
+    border-radius: 2px;
+}
+
+
+.form-header p {
+    color: var(--text-light);
+    font-size: 1rem;
+}
+
+/* --- Input Fields Styling --- */
+.input-group {
+    margin-bottom: 25px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 700;
+    color: var(--text-medium);
+    font-size: 0.95rem;
+}
+
+.input-group .input-wrapper {
+    position: relative;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 14px 20px;
+    border: 2px solid #e0e0e0; /* Thicker, lighter border */
+    border-radius: 10px; /* More rounded */
+    font-size: 1rem;
+    font-family: 'Cairo', sans-serif;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    background-color: #fcfcfc;
+    color: var(--text-dark);
+    /* For RTL, we need padding-left for the icon space */
+    padding-left: 55px; 
+    padding-right: 20px; /* Standard text padding */
+}
+
+/* Style for the fixed icon inside the input field */
+.input-wrapper svg {
+    position: absolute;
+    left: 15px; /* Position on the left side of the input (RTL layout) */
+    top: 50%;
+    transform: translateY(-50%);
+    color: #aaaaaa;
+    width: 20px;
+    height: 20px;
+    pointer-events: none; /* Prevents icon from blocking input focus */
+    transition: color 0.3s;
+}
+
+/* The Eye Icon for Password Toggle */
+.toggle-password {
+    position: absolute;
+    right: 15px; /* Position on the right side of the password input (RTL layout) */
+    left: unset; /* Remove the conflicting 'left' rule */
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #aaaaaa;
+    padding: 5px; /* Area for easy clicking */
+    transition: color 0.3s;
+}
+
+.toggle-password:hover {
+    color: var(--primary-color);
+}
+
+/* --- Focus Styles --- */
+.input-group input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 4px rgba(67, 100, 247, 0.1);
+}
+
+.input-group input:focus ~ svg {
+    color: var(--primary-color); /* Icon color on focus */
+}
+
+.input-group input:focus ~ .toggle-password {
+    color: var(--primary-color); /* Eye icon color on focus */
+}
+
+/* --- Form Options --- */
+.form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    font-size: 0.9rem;
+}
+
+.remember-me {
+    display: flex;
+    align-items: center;
+    user-select: none; /* Prevent text selection on click */
+}
+
+.remember-me input[type="checkbox"] {
+    /* Style the checkbox */
+    margin-right: 8px; /* Space between checkbox and label */
+    margin-left: 0;
+    width: 16px;
+    height: 16px;
+    accent-color: var(--primary-color);
+}
+.remember-me label {
+    margin-bottom: 0;
+    font-weight: 400;
+    color: var(--text-medium);
+    cursor: pointer;
+}
+
+.forgot-password {
+    color: var(--accent-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.forgot-password:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+}
+
+/* --- Login Button Styling --- */
+.btn-login {
+    width: 100%;
+    padding: 16px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.15rem;
+    font-weight: 700;
+    font-family: 'Cairo', sans-serif;
+    cursor: pointer;
+    letter-spacing: 0.5px;
+    transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+    box-shadow: 0 5px 15px rgba(67, 100, 247, 0.3);
+}
+
+.btn-login:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(67, 100, 247, 0.4);
+}
+
+.btn-login:active {
+    transform: translateY(-1px);
+}
+
+/* --- Responsive Design --- */
+@media (max-width: 1000px) {
+    .login-container {
+        flex-direction: column;
+        width: 100%;
+        height: 100%;
+        border-radius: 0;
+        box-shadow: none;
+    }
+    .branding-wrapper {
+        display: none; 
+    }
+    .login-form-wrapper {
+        padding: 40px 25px;
+        flex-grow: 1;
+        justify-content: flex-start;
+    }
+    body {
+        height: auto;
+        min-height: 100vh;
+    }
+}

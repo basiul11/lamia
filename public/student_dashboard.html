@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة تحكم الطالب | لاميا أكاديمي</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Cairo -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <div class="flex min-h-screen">
+        <!-- Sidebar -->
+        <aside class="w-80 bg-white shadow-lg flex-shrink-0 hidden lg:block">
+            <div class="p-6 text-center border-b">
+                <div class="w-24 h-24 rounded-full bg-gray-200 mx-auto mb-4 flex items-center justify-center">
+                    <!-- Placeholder for user avatar -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
+                    </svg>
+                </div>
+                <h2 class="text-xl font-bold text-gray-800">باسل شريف</h2>
+                <p class="text-sm text-gray-500">العام الدراسي: 2025-2026</p>
+            </div>
+            <nav class="p-6 flex-1">
+                <a href="student_dashboard.html" class="flex items-center text-gray-700 p-3 rounded-lg bg-gray-100 font-bold transition-colors">
+                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-3" viewBox="0 0 20 20" fill="currentColor"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" /></svg>
+                    <span>لوحة التحكم</span>
+                </a>
+            </nav>
+            <div class="p-6 mt-auto border-t">
+                <a href="login.html" class="flex items-center justify-center w-full bg-red-500 text-white py-2 rounded-lg hover:bg-red-600 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M3 3a1 1 0 00-1 1v12a1 1 0 102 0V4a1 1 0 00-1-1zm10.293 9.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L14.586 9H7a1 1 0 100 2h7.586l-1.293 1.293z" clip-rule="evenodd" />
+                    </svg>
+                    <span>تسجيل الخروج</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 p-6 lg:p-10">
+            <header class="mb-8">
+                <h1 class="text-3xl font-bold text-gray-800">لوحة التحكم</h1>
+                <p class="text-gray-500">مرحباً بك في بوابتك التعليمية.</p>
+            </header>
+
+            <!-- Action Cards Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                
+                <!-- Card: الواجبات -->
+                <div class="flex flex-col rounded-lg shadow-md overflow-hidden">
+                    <div class="bg-amber-500 text-white p-6 flex-1 flex flex-col items-center justify-center text-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v11.494m-5.75-6.242h11.5" /></svg>
+                        <h3 class="text-xl font-semibold">الواجبات</h3>
+                    </div>
+                    <a href="student_homework.html" class="block bg-amber-600 text-white text-center py-3 hover:bg-amber-700 transition-colors">عرض الكل</a>
+                </div>
+
+                <!-- Card: الاختبارات -->
+                <div class="flex flex-col rounded-lg shadow-md overflow-hidden">
+                    <div class="bg-blue-800 text-white p-6 flex-1 flex flex-col items-center justify-center text-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                        <h3 class="text-xl font-semibold">الاختبارات</h3>
+                    </div>
+                    <a href="student_exams.html" class="block bg-blue-900 text-white text-center py-3 hover:bg-blue-950 transition-colors">عرض الكل</a>
+                </div>
+
+                <!-- Card: المواد الدراسية -->
+                <div class="flex flex-col rounded-lg shadow-md overflow-hidden">
+                    <div class="bg-green-700 text-white p-6 flex-1 flex flex-col items-center justify-center text-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" /></svg>
+                        <h3 class="text-xl font-semibold">المواد الدراسية</h3>
+                    </div>
+                    <a href="student_materials.html" class="block bg-green-800 text-white text-center py-3 hover:bg-green-900 transition-colors">عرض الكل</a>
+                </div>
+
+                <!-- Card: الشهادات -->
+                <div class="flex flex-col rounded-lg shadow-md overflow-hidden">
+                    <div class="bg-red-700 text-white p-6 flex-1 flex flex-col items-center justify-center text-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        <h3 class="text-xl font-semibold">الشهادات</h3>
+                    </div>
+                    <a href="student_certificates.html" class="block bg-red-800 text-white text-center py-3 hover:bg-red-900 transition-colors">عرض التقرير</a>
+                </div>
+
+                <!-- Card: الحضور -->
+                <div class="flex flex-col rounded-lg shadow-md overflow-hidden">
+                    <div class="bg-cyan-600 text-white p-6 flex-1 flex flex-col items-center justify-center text-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" /></svg>
+                        <h3 class="text-xl font-semibold">الحضور</h3>
+                    </div>
+                    <a href="student_attendance.html" class="block bg-cyan-700 text-white text-center py-3 hover:bg-cyan-800 transition-colors">عرض التقرير</a>
+                </div>
+
+                <!-- Card: الجدول الدراسي -->
+                <div class="flex flex-col rounded-lg shadow-md overflow-hidden">
+                    <div class="bg-indigo-700 text-white p-6 flex-1 flex flex-col items-center justify-center text-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0h18M-4.5 12h22.5" /></svg>
+                        <h3 class="text-xl font-semibold">الجدول الدراسي</h3>
+                    </div>
+                    <a href="student_schedule.html" class="block bg-indigo-800 text-white text-center py-3 hover:bg-indigo-900 transition-colors">عرض الجدول</a>
+                </div>
+
+            </div>
+        </main>
+    </div>
+</body>
+</html>

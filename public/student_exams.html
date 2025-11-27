@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الاختبارات | لاميا أكاديمي</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style> body { font-family: 'Cairo', sans-serif; } </style>
+</head>
+<body class="bg-gray-100">
+    <div class="flex min-h-screen">
+        <!-- Sidebar -->
+        <aside class="w-80 bg-white shadow-lg flex-shrink-0 hidden lg:flex flex-col">
+            <div class="p-6 text-center border-b">
+                <div class="w-24 h-24 rounded-full bg-gray-200 mx-auto mb-4 flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-gray-400" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" /></svg>
+                </div>
+                <h2 class="text-xl font-bold text-gray-800">باسل شريف</h2>
+                <p class="text-sm text-gray-500">العام الدراسي: 2025-2026</p>
+            </div>
+            <nav class="p-6 flex-1">
+                <a href="student_dashboard.html" class="flex items-center text-gray-700 p-3 rounded-lg hover:bg-gray-100 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-3" viewBox="0 0 20 20" fill="currentColor"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" /></svg>
+                    <span>لوحة التحكم</span>
+                </a>
+            </nav>
+            <div class="p-6 mt-auto border-t">
+                <a href="login.html" class="flex items-center justify-center w-full bg-red-500 text-white py-2 rounded-lg hover:bg-red-600 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3 3a1 1 0 00-1 1v12a1 1 0 102 0V4a1 1 0 00-1-1zm10.293 9.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L14.586 9H7a1 1 0 100 2h7.586l-1.293 1.293z" clip-rule="evenodd" /></svg>
+                    <span>تسجيل الخروج</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 p-6 lg:p-10">
+            <header class="mb-8">
+                <h1 class="text-3xl font-bold text-gray-800">الاختبارات والدرجات</h1>
+                <p class="text-gray-500">تابع نتائج اختباراتك ودرجاتك.</p>
+            </header>
+
+            <div class="bg-white p-8 rounded-lg shadow-md text-center">
+                <h2 class="text-2xl font-semibold text-gray-700">جدول الاختبارات والنتائج</h2>
+                <p class="text-gray-500 mt-2">سيتم عرض جدول الاختبارات القادمة ونتائج الاختبارات السابقة هنا.</p>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
