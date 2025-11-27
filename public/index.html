@@ -21,7 +21,7 @@
                     <h1 class="text-3xl font-bold text-gray-800">أهلاً بك مجدداً!</h1>
                     <p class="text-gray-500">سجل الدخول للمتابعة في لاميا أكاديمي</p>
                 </div>
-                <form>
+                <form id="loginForm">
                     <div class="mb-4">
                         <label for="user_id" class="block text-gray-700 text-sm font-bold mb-2">رقم المستخدم</label>
                         <input type="text" id="user_id" name="user_id" required inputmode="numeric" class="shadow-sm appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500">
@@ -40,6 +40,7 @@
                     <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg focus:outline-none focus:shadow-outline transition-colors">
                         تسجيل الدخول
                     </button>
+                    <p id="errorMessage" class="text-red-500 text-center mt-4 hidden"></p>
                 </form>
             </div>
             <!-- Branding Section -->
@@ -51,5 +52,49 @@
             </div>
         </div>
     </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            const userId = document.getElementById('user_id').value;
+            const password = document.getElementById('password').value;
+            const errorMessage = document.getElementById('errorMessage');
+            errorMessage.classList.add('hidden');
+
+            // تحديد رابط الخادم
+            const isLocal = window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost';
+            // تم وضع رابط الخادم الخاص بك
+            const backendUrl = isLocal ? 'http://localhost:5000' : 'https://worthy-integrity.reply.io';
+
+            try {
+                const response = await fetch(`${backendUrl}/api/login`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ userId, password }),
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(data.message || 'فشل تسجيل الدخول');
+                }
+
+                // توجيه المستخدم بناءً على دوره
+                if (data.user.role === 'مدير') {
+                    window.location.href = '/admin_dashboard.html';
+                } else if (data.user.role === 'معلم') {
+                    window.location.href = '/teacher_dashboard.html';
+                } else {
+                    window.location.href = '/student_dashboard.html';
+                }
+            } catch (error) {
+                errorMessage.textContent = error.message;
+                errorMessage.classList.remove('hidden');
+            }
+        });
+    </script>
 </body>
 </html>

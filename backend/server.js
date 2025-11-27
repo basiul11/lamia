@@ -14,8 +14,8 @@ app.use(express.json()); // لتحليل الطلبات القادمة كـ JSON
 // --- إعدادات CORS ---
 // في بيئة التطوير، نسمح للجميع بالوصول
 // في بيئة الإنتاج (على Railway)، سنحدد رابط Netlify فقط
-// **ملاحظة هامة:** استبدل الرابط أدناه برابط موقعك الفعلي على Netlify
-const whitelist = ['http://localhost:5500', 'http://127.0.0.1:5500', 'https://your-netlify-app-name.netlify.app']; 
+// رابط موقعك على Netlify
+const whitelist = ['http://localhost:5500', 'http://127.0.0.1:5500', 'https://lamia0.netlify.app']; 
 const corsOptions = {
   origin: function (origin, callback) {
     // نسمح بالطلبات التي ليس لها origin (مثل Postman أو تطبيقات الموبايل) في بيئة التطوير
@@ -43,6 +43,29 @@ app.get('/api/users', async (req, res) => {
     try {
         const users = await User.find({}).sort({ createdAt: -1 }); // جلب كل المستخدمين من قاعدة البيانات
         res.json(users);
+    } catch (error) {
+        res.status(500).json({ message: 'خطأ في الخادم' });
+    }
+});
+
+// POST: تسجيل الدخول
+app.post('/api/login', async (req, res) => {
+    try {
+        const { userId, password } = req.body;
+        if (!userId || !password) {
+            return res.status(400).json({ message: 'الرجاء إدخال رقم المستخدم وكلمة المرور' });
+        }
+
+        const user = await User.findOne({ userId: userId });
+
+        if (user && user.password === password) { // ملاحظة: في تطبيق حقيقي، يجب تشفير كلمات المرور
+            res.json({
+                message: 'تم تسجيل الدخول بنجاح',
+                user: { name: user.name, role: user.role, userId: user.userId }
+            });
+        } else {
+            res.status(401).json({ message: 'رقم المستخدم أو كلمة المرور غير صحيحة' });
+        }
     } catch (error) {
         res.status(500).json({ message: 'خطأ في الخادم' });
     }

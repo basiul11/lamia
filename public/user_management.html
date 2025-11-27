@@ -96,8 +96,8 @@
                 try {
                     // هذا الكود يحدد رابط الخادم تلقائيًا
                     const isLocal = window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost';
-                    // **ملاحظة:** استبدل الرابط أدناه برابط خادمك الفعلي على Railway
-                    const backendUrl = isLocal ? 'http://localhost:5000' : 'https://your-backend-name.up.railway.app'; 
+                    // تم وضع رابط الخادم الخاص بك
+                    const backendUrl = isLocal ? 'http://localhost:5000' : 'https://worthy-integrity.reply.io'; 
 
                     const response = await fetch(`${backendUrl}/api/users`);
                     if (!response.ok) {
