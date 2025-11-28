@@ -78,7 +78,6 @@ app.post('/api/login', async (req, res) => {
     }
 });
 
-// GET: جلب الإحصائيات (عدد الطلاب والمعلمين)
 app.get('/api/stats', async (req, res) => {
     try {
         const studentCount = await User.countDocuments({ role: 'طالب' });
