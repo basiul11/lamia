@@ -101,6 +101,36 @@ app.post('/api/login', async (req, res) => {
     }
 });
 
+// POST: إضافة مستخدم جديد
+app.post('/api/users', async (req, res) => {
+    try {
+        const { name, password, role } = req.body;
+
+        if (!name || !password || !role) {
+            return res.status(400).json({ message: 'الرجاء إدخال جميع الحقول المطلوبة' });
+        }
+
+        // إيجاد أعلى userId موجود حاليًا
+        const lastUser = await User.findOne().sort({ userId: -1 });
+        let newUserId = 1000; // قيمة افتراضية لأول مستخدم
+        if (lastUser && lastUser.userId) {
+            newUserId = lastUser.userId + 1;
+        }
+
+        const newUser = new User({
+            userId: newUserId,
+            name,
+            password, // ملاحظة: يجب تشفير كلمة المرور في تطبيق حقيقي
+            role
+        });
+
+        const createdUser = await newUser.save();
+        res.status(201).json(createdUser);
+    } catch (error) {
+        console.error('Add User Error:', error);
+        res.status(500).json({ message: 'حدث خطأ في الخادم عند إضافة المستخدم' });
+    }
+});
 
 // GET: جلب الإحصائيات (عدد الطلاب والمعلمين)
 app.get('/api/stats', async (req, res) => {
