@@ -53,7 +53,10 @@ app.post('/api/login', async (req, res) => {
             return res.status(400).json({ message: 'الرجاء إدخال رقم المستخدم وكلمة المرور' });
         }
 
-        const user = await User.findOne({ userId: userId });
+        // تحويل userId من نص إلى رقم قبل البحث
+        const numericUserId = parseInt(userId, 10);
+
+        const user = await User.findOne({ userId: numericUserId });
 
         if (user && user.password === password) { // ملاحظة: في تطبيق حقيقي، يجب تشفير كلمات المرور
             res.json({
