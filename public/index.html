@@ -82,6 +82,9 @@
                     throw new Error(data.message || 'فشل تسجيل الدخول');
                 }
 
+                // حفظ بيانات المستخدم في المتصفح للوصول إليها في الصفحات الأخرى
+                localStorage.setItem('lamiaUser', JSON.stringify(data.user));
+
                 // توجيه المستخدم بناءً على دوره
                 if (data.user.role === 'مدير') {
                     window.location.href = '/admin_dashboard.html';

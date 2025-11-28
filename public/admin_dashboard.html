@@ -48,7 +48,7 @@
                     <p class="text-gray-500">نظرة عامة على النظام.</p>
                 </div>
                 <div class="flex items-center">
-                    <span class="text-gray-600">أهلاً، <strong>أحمد (مدير)</strong></span>
+                    <span class="text-gray-600">أهلاً، <strong id="userName">(مدير)</strong></span>
                     <div class="w-10 h-10 rounded-full bg-gray-200 mr-4 flex items-center justify-center">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-400" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" /></svg>
                     </div>
@@ -145,6 +145,12 @@
                 }
             }
             fetchStats();
+
+            const user = JSON.parse(localStorage.getItem('lamiaUser'));
+            if (user && user.name) {
+                document.getElementById('userName').textContent = `${user.name} (مدير)`;
+            }
+
         });
     </script>
 </body>
