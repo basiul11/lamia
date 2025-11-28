@@ -67,7 +67,9 @@ app.post('/api/login', async (req, res) => {
             res.status(401).json({ message: 'رقم المستخدم أو كلمة المرور غير صحيحة' });
         }
     } catch (error) {
-        res.status(500).json({ message: 'خطأ في الخادم' });
+        // طباعة الخطأ بالتفصيل في سجلات Render
+        console.error('Login Error:', error); 
+        res.status(500).json({ message: 'حدث خطأ في الخادم، يرجى المحاولة مرة أخرى' });
     }
 });
 

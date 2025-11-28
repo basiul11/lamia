@@ -27,7 +27,7 @@
                         <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
                     </svg>
                 </div>
-                <h2 class="text-xl font-bold text-gray-800">باسل شريف</h2>
+                <h2 id="studentName" class="text-xl font-bold text-gray-800">طالب</h2>
                 <p class="text-sm text-gray-500">العام الدراسي: 2025-2026</p>
             </div>
             <nav class="p-6 flex-1">
@@ -113,5 +113,13 @@
             </div>
         </main>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const user = JSON.parse(localStorage.getItem('lamiaUser'));
+            if (user && user.name) {
+                document.getElementById('studentName').textContent = user.name;
+            }
+        });
+    </script>
 </body>
 </html>
