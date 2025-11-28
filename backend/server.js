@@ -56,6 +56,11 @@ app.post('/api/login', async (req, res) => {
         // تحويل userId من نص إلى رقم قبل البحث
         const numericUserId = parseInt(userId, 10);
 
+        // التحقق من أن الناتج هو رقم صالح
+        if (isNaN(numericUserId)) {
+            return res.status(400).json({ message: 'رقم المستخدم يجب أن يكون رقمًا صحيحًا.' });
+        }
+
         const user = await User.findOne({ userId: numericUserId });
 
         if (user && user.password === password) { // ملاحظة: في تطبيق حقيقي، يجب تشفير كلمات المرور
