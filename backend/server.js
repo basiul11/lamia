@@ -9,24 +9,6 @@ const User = require('./userModel');
 dotenv.config(); // لتحميل المتغيرات من ملف .env
 const app = express();
 
-// --- إنشاء مدير افتراضي عند بدء التشغيل (إذا لم يكن موجودًا) ---
-const createDefaultAdmin = async () => {
-    try {
-        const adminExists = await User.findOne({ role: 'مدير' });
-        if (!adminExists) {
-            console.log('لم يتم العثور على مدير. جاري إنشاء مدير افتراضي...');
-            const defaultAdmin = new User({
-                userId: 999,
-                name: 'المدير العام',
-                password: 'admin123', // ملاحظة: قم بتغيير كلمة المرور هذه بعد أول تسجيل دخول
-                role: 'مدير'
-            });
-            await defaultAdmin.save();
-            console.log('تم إنشاء المدير الافتراضي بنجاح. رقم المستخدم: 999 | كلمة المرور: admin123');
-        }
-    } catch (error) { console.error('خطأ أثناء إنشاء المدير الافتراضي:', error); }
-};
-
 app.use(express.json()); // لتحليل الطلبات القادمة كـ JSON
 
 // --- إعدادات CORS ---
@@ -146,10 +128,32 @@ app.get('/api/stats', async (req, res) => {
 // --- تشغيل الخادم ---
 const PORT = process.env.PORT || 5000;
 
-connectDB().then(() => {
-    app.listen(PORT, () => {
-        console.log(`Server running on port ${PORT}`);
-        // الآن بعد أن يعمل الخادم والاتصال بقاعدة البيانات ناجح، يمكننا إنشاء المدير
-        createDefaultAdmin();
-    });
-});
+const startServer = async () => {
+    try {
+        await connectDB();
+        app.listen(PORT, () => {
+            console.log(`Server running on port ${PORT}`);
+            // --- إنشاء مدير افتراضي عند بدء التشغيل (إذا لم يكن موجودًا) ---
+            const createDefaultAdmin = async () => {
+                const adminExists = await User.findOne({ role: 'مدير' });
+                if (!adminExists) {
+                    console.log('لم يتم العثور على مدير. جاري إنشاء مدير افتراضي...');
+                    const defaultAdmin = new User({
+                        userId: 999,
+                        name: 'المدير العام',
+                        password: 'admin123',
+                        role: 'مدير'
+                    });
+                    await defaultAdmin.save();
+                    console.log('تم إنشاء المدير الافتراضي بنجاح. رقم المستخدم: 999 | كلمة المرور: admin123');
+                }
+            };
+            createDefaultAdmin();
+        });
+    } catch (error) {
+        console.error("Failed to start server:", error);
+    }
+};
+
+startServer();
+
