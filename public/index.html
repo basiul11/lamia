@@ -64,8 +64,8 @@
 
             // تحديد رابط الخادم
             const isLocal = window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost';
-            // تم وضع رابط الخادم الخاص بك
-            const backendUrl = isLocal ? 'http://localhost:5000' : 'https://worthy-integrity.reply.io';
+            // **ملاحظة هامة:** سيتم استبدال هذا الرابط بالرابط الصحيح من Railway لاحقاً
+            const backendUrl = isLocal ? 'http://localhost:5000' : 'https://your-railway-app.up.railway.app';
 
             try {
                 const response = await fetch(`${backendUrl}/api/login`, {

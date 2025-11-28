@@ -64,7 +64,7 @@
                     </div>
                     <div>
                         <h4 class="text-gray-500 font-medium">إجمالي الطلاب</h4>
-                        <p class="text-3xl font-bold text-gray-800">0</p>
+                        <p id="studentCount" class="text-3xl font-bold text-gray-800">0</p>
                     </div>
                 </div>
                 <!-- Card -->
@@ -74,7 +74,7 @@
                     </div>
                     <div>
                         <h4 class="text-gray-500 font-medium">إجمالي المعلمين</h4>
-                        <p class="text-3xl font-bold text-gray-800">0</p>
+                        <p id="teacherCount" class="text-3xl font-bold text-gray-800">0</p>
                     </div>
                 </div>
                 <!-- Card -->
@@ -84,7 +84,7 @@
                     </div>
                     <div>
                         <h4 class="text-gray-500 font-medium">إجمالي المواد</h4>
-                        <p class="text-3xl font-bold text-gray-800">0</p>
+                        <p id="subjectCount" class="text-3xl font-bold text-gray-800">0</p>
                     </div>
                 </div>
             </div>
@@ -121,5 +121,31 @@
             </div>
         </main>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            async function fetchStats() {
+                try {
+                    const isLocal = window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost';
+                    // **ملاحظة هامة:** سيتم استبدال هذا الرابط بالرابط الصحيح من Railway لاحقاً
+                    const backendUrl = isLocal ? 'http://localhost:5000' : 'https://your-railway-app.up.railway.app';
+
+                    const response = await fetch(`${backendUrl}/api/stats`);
+                    if (!response.ok) {
+                        throw new Error('فشل في جلب الإحصائيات');
+                    }
+                    const stats = await response.json();
+
+                    document.getElementById('studentCount').textContent = stats.studentCount;
+                    document.getElementById('teacherCount').textContent = stats.teacherCount;
+                    document.getElementById('subjectCount').textContent = stats.subjectCount;
+
+                } catch (error) {
+                    console.error('Error fetching stats:', error);
+                }
+            }
+            fetchStats();
+        });
+    </script>
 </body>
 </html>
