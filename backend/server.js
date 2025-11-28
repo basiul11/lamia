@@ -31,11 +31,6 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 
-// --- تقديم الملفات الثابتة (الواجهة الأمامية) ---
-// نجعل الخادم يقدم ملفات HTML من مجلد public
-const publicPath = path.join(__dirname, '..', 'public');
-app.use(express.static(publicPath));
-
 // --- نقاط الوصول (API Endpoints) ---
 
 // GET: جلب كل المستخدمين
@@ -94,10 +89,11 @@ app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
 
-// --- معالجة الروابط غير المعروفة (Catch-all Route) ---
-// هذا السطر مهم جدًا لتطبيقات الصفحة الواحدة (SPA).
-// أي طلب لا يتطابق مع نقاط الوصول (API) أعلاه، سيتم توجيهه إلى الواجهة الأمامية.
-// هذا يسمح لـ Netlify بمعالجة الروابط مثل /admin_dashboard.html مباشرة.
-app.get('*', (req, res, next) => {
-    res.sendFile(path.join(publicPath, 'index.html'));
-});
+// --- تقديم الملفات الثابتة (الواجهة الأمامية) ---
+// **ملاحظة هامة:** يجب وضع هذا الجزء في النهاية، بعد تعريف كل نقاط الوصول (API).
+// هذا يضمن أن الخادم يبحث أولاً عن نقاط الوصول، وإذا لم يجدها، فإنه يبحث في الملفات الثابتة.
+const publicPath = path.join(__dirname, '..', 'public');
+app.use(express.static(publicPath));
+app.get('*', (req, res) => {
+    res.sendFile(path.resolve(publicPath, 'index.html'));
+})
