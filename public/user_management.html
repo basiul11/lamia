@@ -62,7 +62,7 @@
                         <input type="text" placeholder="ابحث بالاسم أو رقم المستخدم..." class="w-full py-2 pr-10 pl-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                         <svg class="w-5 h-5 text-gray-400 absolute right-3 top-1/2 transform -translate-y-1/2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
                     </div>
-                    <button class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg flex items-center">
+                    <button id="openAddUserModalBtn" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg flex items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" /></svg>
                         <span>إضافة مستخدم</span>
                     </button>
@@ -87,18 +87,51 @@
         </main>
     </div>
 
+    <!-- Add User Modal -->
+    <div id="addUserModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full hidden z-50">
+        <div class="relative top-20 mx-auto p-5 border w-full max-w-md shadow-lg rounded-md bg-white">
+            <div class="flex justify-between items-center border-b pb-3">
+                <h3 class="text-lg font-medium text-gray-900">إضافة مستخدم جديد</h3>
+                <button id="closeAddUserModalBtn" class="text-gray-400 hover:text-gray-600">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+            <form id="addUserForm" class="mt-4">
+                <div class="mb-4 text-right">
+                    <label for="newUserName" class="block text-gray-700 text-sm font-bold mb-2">الاسم الكامل</label>
+                    <input type="text" id="newUserName" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div class="mb-4 text-right">
+                    <label for="newUserPassword" class="block text-gray-700 text-sm font-bold mb-2">كلمة المرور</label>
+                    <input type="password" id="newUserPassword" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div class="mb-6 text-right">
+                    <label for="newUserRole" class="block text-gray-700 text-sm font-bold mb-2">الدور</label>
+                    <select id="newUserRole" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="طالب">طالب</option>
+                        <option value="معلم">معلم</option>
+                        <option value="مدير">مدير</option>
+                    </select>
+                </div>
+                <p id="addUserError" class="text-red-500 text-center mb-4 hidden"></p>
+                <div class="flex items-center justify-end">
+                    <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline">
+                        حفظ المستخدم
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const tableBody = document.getElementById('usersTableBody');
+            const backendUrl = (window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost') ? 'http://localhost:5000' : 'https://lamia-backend.onrender.com';
 
             async function fetchAndRenderUsers() {
                 tableBody.innerHTML = `<tr><td colspan="5" class="text-center py-4">جاري تحميل المستخدمين...</td></tr>`;
                 try {
-                    // هذا الكود يحدد رابط الخادم تلقائيًا
-                    const isLocal = window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost';
-                    // تم وضع رابط الخادم الخاص بك من Render
-                    const backendUrl = isLocal ? 'http://localhost:5000' : 'https://lamia-backend.onrender.com'; 
-
                     const response = await fetch(`${backendUrl}/api/users`);
                     if (!response.ok) {
                         const errorData = await response.json();
@@ -142,6 +175,54 @@
             }
 
             fetchAndRenderUsers();
+
+            // --- Modal Logic ---
+            const addUserModal = document.getElementById('addUserModal');
+            const openModalBtn = document.getElementById('openAddUserModalBtn');
+            const closeModalBtn = document.getElementById('closeAddUserModalBtn');
+            const addUserForm = document.getElementById('addUserForm');
+            const addUserError = document.getElementById('addUserError');
+
+            openModalBtn.addEventListener('click', () => {
+                addUserModal.classList.remove('hidden');
+            });
+
+            closeModalBtn.addEventListener('click', () => {
+                addUserModal.classList.add('hidden');
+                addUserForm.reset();
+                addUserError.classList.add('hidden');
+            });
+
+            addUserForm.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                addUserError.classList.add('hidden');
+
+                const name = document.getElementById('newUserName').value;
+                const password = document.getElementById('newUserPassword').value;
+                const role = document.getElementById('newUserRole').value;
+
+                try {
+                    const response = await fetch(`${backendUrl}/api/users`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ name, password, role })
+                    });
+
+                    const data = await response.json();
+
+                    if (!response.ok) {
+                        throw new Error(data.message || 'فشل في إضافة المستخدم');
+                    }
+
+                    // نجح الأمر
+                    closeModalBtn.click(); // إغلاق النافذة
+                    fetchAndRenderUsers(); // إعادة تحميل قائمة المستخدمين
+
+                } catch (error) {
+                    addUserError.textContent = error.message;
+                    addUserError.classList.remove('hidden');
+                }
+            });
         });
     </script>
 </body>
