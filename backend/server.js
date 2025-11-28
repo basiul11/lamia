@@ -19,10 +19,7 @@ const whitelist = ['http://localhost:5500', 'http://127.0.0.1:5500', 'https://la
 const corsOptions = {
   origin: function (origin, callback) {
     // نسمح بالطلبات التي ليس لها origin (مثل Postman أو تطبيقات الموبايل) في بيئة التطوير
-    if (!origin && process.env.NODE_ENV !== 'production') {
-        return callback(null, true);
-    }
-    if (whitelist.indexOf(origin) !== -1) {
+    if (!origin || whitelist.indexOf(origin) !== -1) {
       callback(null, true);
     } else {
       callback(new Error('Not allowed by CORS'));
