@@ -9,6 +9,29 @@ const User = require('./userModel');
 dotenv.config(); // لتحميل المتغيرات من ملف .env
 connectDB(); // للاتصال بقاعدة البيانات
 const app = express();
+
+// --- إنشاء مدير افتراضي عند بدء التشغيل (إذا لم يكن موجودًا) ---
+const createDefaultAdmin = async () => {
+    try {
+        // انتظر قليلاً للتأكد من أن الاتصال بقاعدة البيانات قد تم
+        await new Promise(resolve => setTimeout(resolve, 3000)); 
+
+        const adminExists = await User.findOne({ role: 'مدير' });
+        if (!adminExists) {
+            console.log('لم يتم العثور على مدير. جاري إنشاء مدير افتراضي...');
+            const defaultAdmin = new User({
+                userId: 999,
+                name: 'المدير العام',
+                password: 'admin123', // ملاحظة: قم بتغيير كلمة المرور هذه بعد أول تسجيل دخول
+                role: 'مدير'
+            });
+            await defaultAdmin.save();
+            console.log('تم إنشاء المدير الافتراضي بنجاح. رقم المستخدم: 999 | كلمة المرور: admin123');
+        }
+    } catch (error) { console.error('خطأ أثناء إنشاء المدير الافتراضي:', error); }
+};
+createDefaultAdmin();
+
 app.use(express.json()); // لتحليل الطلبات القادمة كـ JSON
 
 // --- إعدادات CORS ---
