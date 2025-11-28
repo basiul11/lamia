@@ -96,8 +96,8 @@
                 try {
                     // هذا الكود يحدد رابط الخادم تلقائيًا
                     const isLocal = window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost';
-                    // **ملاحظة هامة:** سيتم استبدال هذا الرابط بالرابط الصحيح من Railway لاحقاً
-                    const backendUrl = isLocal ? 'http://localhost:5000' : 'https://your-railway-app.up.railway.app'; 
+                    // **ملاحظة هامة:** سيتم استبدال هذا الرابط بالرابط الصحيح من Render لاحقاً
+                    const backendUrl = isLocal ? 'http://localhost:5000' : 'https://your-render-backend.onrender.com'; 
 
                     const response = await fetch(`${backendUrl}/api/users`);
                     if (!response.ok) {

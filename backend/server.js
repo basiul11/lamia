@@ -87,22 +87,6 @@ app.get('/api/stats', async (req, res) => {
     }
 });
 
-// GET: جلب الإحصائيات (عدد الطلاب والمعلمين)
-app.get('/api/stats', async (req, res) => {
-    try {
-        const studentCount = await User.countDocuments({ role: 'طالب' });
-        const teacherCount = await User.countDocuments({ role: 'معلم' });
-        // يمكنك إضافة إحصائيات أخرى هنا مستقبلاً
-        res.json({
-            studentCount,
-            teacherCount,
-            subjectCount: 0 // قيمة وهمية حالياً
-        });
-    } catch (error) {
-        res.status(500).json({ message: 'خطأ في الخادم عند جلب الإحصائيات' });
-    }
-});
-
 // --- تشغيل الخادم ---
 const PORT = process.env.PORT || 5000;
 
