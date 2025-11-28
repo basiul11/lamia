@@ -94,7 +94,10 @@ app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
 
-// توجيه أي طلب غير معروف إلى صفحة تسجيل الدخول
-app.get('*', (req, res) => {
-  res.sendFile(path.resolve(publicPath, 'index.html'));
+// --- معالجة الروابط غير المعروفة (Catch-all Route) ---
+// هذا السطر مهم جدًا لتطبيقات الصفحة الواحدة (SPA).
+// أي طلب لا يتطابق مع نقاط الوصول (API) أعلاه، سيتم توجيهه إلى الواجهة الأمامية.
+// هذا يسمح لـ Netlify بمعالجة الروابط مثل /admin_dashboard.html مباشرة.
+app.get('*', (req, res, next) => {
+    res.sendFile(path.join(publicPath, 'index.html'));
 });
