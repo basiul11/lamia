@@ -7,15 +7,11 @@ const User = require('./userModel');
 
 // --- إعدادات أولية ---
 dotenv.config(); // لتحميل المتغيرات من ملف .env
-connectDB(); // للاتصال بقاعدة البيانات
 const app = express();
 
 // --- إنشاء مدير افتراضي عند بدء التشغيل (إذا لم يكن موجودًا) ---
 const createDefaultAdmin = async () => {
     try {
-        // انتظر قليلاً للتأكد من أن الاتصال بقاعدة البيانات قد تم
-        await new Promise(resolve => setTimeout(resolve, 3000)); 
-
         const adminExists = await User.findOne({ role: 'مدير' });
         if (!adminExists) {
             console.log('لم يتم العثور على مدير. جاري إنشاء مدير افتراضي...');
@@ -30,7 +26,6 @@ const createDefaultAdmin = async () => {
         }
     } catch (error) { console.error('خطأ أثناء إنشاء المدير الافتراضي:', error); }
 };
-createDefaultAdmin();
 
 app.use(express.json()); // لتحليل الطلبات القادمة كـ JSON
 
@@ -151,6 +146,10 @@ app.get('/api/stats', async (req, res) => {
 // --- تشغيل الخادم ---
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
+connectDB().then(() => {
+    app.listen(PORT, () => {
+        console.log(`Server running on port ${PORT}`);
+        // الآن بعد أن يعمل الخادم والاتصال بقاعدة البيانات ناجح، يمكننا إنشاء المدير
+        createDefaultAdmin();
+    });
 });
