@@ -4,6 +4,7 @@ const cors = require('cors');
 const path = require('path');
 const connectDB = require('./db');
 const User = require('./userModel');
+const bcrypt = require('bcrypt');
 
 // --- إعدادات أولية ---
 dotenv.config(); // لتحميل المتغيرات من ملف .env
@@ -38,7 +39,8 @@ app.use(express.static(publicPath));
 // GET: جلب كل المستخدمين
 app.get('/api/users', async (req, res) => {
     try {
-        const users = await User.find({}).sort({ createdAt: -1 }); // جلب كل المستخدمين من قاعدة البيانات
+        // لا نعيد حقل كلمة المرور في الاستجابة لأسباب أمنيّة
+        const users = await User.find({}).select('-password').sort({ createdAt: -1 }); // جلب كل المستخدمين من قاعدة البيانات
         res.json(users);
     } catch (error) {
         res.status(500).json({ message: 'خطأ في الخادم' });
@@ -63,7 +65,32 @@ app.post('/api/login', async (req, res) => {
 
         const user = await User.findOne({ userId: numericUserId });
 
-        if (user && user.password === password) { // ملاحظة: في تطبيق حقيقي، يجب تشفير كلمات المرور
+        if (!user) {
+            return res.status(401).json({ message: 'رقم المستخدم أو كلمة المرور غير صحيحة' });
+        }
+
+        // مقارنة مرنة: إذا كانت كلمة المرور مخزنة كـ bcrypt hash نستخدم compare،
+        // أما إذا كانت نصية (من إصدار قديم) فنقارن نصيًا ثم نرحّلها إلى hash عند النجاح.
+        const saltRounds = 10;
+        let passwordMatch = false;
+        if (typeof user.password === 'string' && user.password.startsWith('$2')) {
+            passwordMatch = await bcrypt.compare(password, user.password);
+        } else {
+            // كلمات المرور النصية قد تكون موجودة في قاعدة قديمة
+            passwordMatch = user.password === password;
+            if (passwordMatch) {
+                // ترحيل كلمة المرور إلى نسخة مشفّرة
+                try {
+                    const hashed = await bcrypt.hash(password, saltRounds);
+                    user.password = hashed;
+                    await user.save();
+                } catch (err) {
+                    console.error('Error migrating plaintext password to hash:', err);
+                }
+            }
+        }
+
+        if (passwordMatch) {
             res.json({
                 message: 'تم تسجيل الدخول بنجاح',
                 user: { name: user.name, role: user.role, userId: user.userId }
@@ -94,10 +121,13 @@ app.post('/api/users', async (req, res) => {
             newUserId = lastUser.userId + 1;
         }
 
+        const saltRounds = 10;
+        const hashedPassword = await bcrypt.hash(password, saltRounds);
+
         const newUser = new User({
             userId: newUserId,
             name,
-            password, // ملاحظة: يجب تشفير كلمة المرور في تطبيق حقيقي
+            password: hashedPassword,
             role
         });
 
@@ -137,13 +167,19 @@ const startServer = async () => {
                 const adminExists = await User.findOne({ role: 'مدير' });
                 if (!adminExists) {
                     console.log('لم يتم العثور على مدير. جاري إنشاء مدير افتراضي...');
-                    const defaultAdmin = new User({
-                        userId: 999,
-                        name: 'المدير العام',
-                        password: 'admin123',
-                        role: 'مدير'
-                    });
-                    await defaultAdmin.save();
+                    try {
+                        const saltRounds = 10;
+                        const hashed = await bcrypt.hash('admin123', saltRounds);
+                        const defaultAdmin = new User({
+                            userId: 999,
+                            name: 'المدير العام',
+                            password: hashed,
+                            role: 'مدير'
+                        });
+                        await defaultAdmin.save();
+                    } catch (err) {
+                        console.error('Failed to create default admin:', err);
+                    }
                     console.log('تم إنشاء المدير الافتراضي بنجاح. رقم المستخدم: 999 | كلمة المرور: admin123');
                 }
             };
